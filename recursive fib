@@ -1,0 +1,25 @@
+import parsl
+from parsl import python_app
+parsl.load()
+
+@python_app
+def add(val,val2):
+  return val+val2
+
+@python_app
+def fib(n):
+  if n== 0:
+    return 0
+  elif n==1:
+    return 1
+  else:
+    return add(fib(n-1),fib(n-2))
+results=[]
+for i in range(0,1):
+  x=fib(10)
+  results.append(x)
+output=[i.result() for i in results]
+
+for r in output:
+  print(r)
+ 
